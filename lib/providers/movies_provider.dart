@@ -11,6 +11,8 @@ class MoviesProvider extends ChangeNotifier {
   final String _baseUrl = 'api.themoviedb.org';
   final String _language = 'es-ES';
 
+  List<Movie> onDisplayMovies = [];
+
   MoviesProvider() {
     print('MoviesProvider');
     getOnDisplayMovies();
@@ -30,6 +32,6 @@ class MoviesProvider extends ChangeNotifier {
     // Await the http get response, then decode the json-formatted response.
     var response = await http.get(url);
     final nowPlayingRespinse = NowPlayingResponse.fromJson(response.body);
-    print(nowPlayingRespinse.results[0].title);
+    onDisplayMovies = nowPlayingRespinse.results;
   }
 }
