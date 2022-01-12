@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas/widgets/widgets.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({Key? key}) : super(key: key);
@@ -15,11 +16,36 @@ class DetailsScreen extends StatelessWidget {
           delegate: SliverChildListDelegate(
             [
               const _PosterAndTitle(),
+              const _Overview(),
+              const CastingCards(),
             ],
           ),
         ),
       ],
     ));
+  }
+}
+
+class _Overview extends StatelessWidget {
+  const _Overview({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme _textTheme = Theme.of(context).textTheme;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 30,
+      ),
+      child: Text(
+        'Mollit quis laboris quis in esse minim reprehenderit. Pariatur cillum tempor aliquip esse cillum tempor pariatur fugiat est esse. Occaecat duis eiusmod voluptate laboris consectetur. Cillum adipisicing Lorem culpa sunt esse officia. Laborum voluptate ipsum est minim. Incididunt dolore ipsum in velit labore pariatur esse sunt aute excepteur Lorem. Commodo occaecat mollit Lorem ex aliqua.',
+        textAlign: TextAlign.justify,
+        style: _textTheme.subtitle1,
+      ),
+    );
   }
 }
 
@@ -30,6 +56,8 @@ class _PosterAndTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme _textTheme = Theme.of(context).textTheme;
+
     return Container(
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -43,6 +71,37 @@ class _PosterAndTitle extends StatelessWidget {
               height: 150,
             ),
           ),
+          const SizedBox(width: 20),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Movie Title',
+                style: _textTheme.headline5,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
+              Text(
+                'Original Title',
+                style: _textTheme.subtitle1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.star_outline,
+                    size: 15,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    '8.0',
+                    style: _textTheme.caption,
+                  ),
+                ],
+              ),
+            ],
+          )
         ],
       ),
     );
@@ -65,6 +124,7 @@ class _CustomAppBar extends StatelessWidget {
         titlePadding: const EdgeInsets.all(0),
         centerTitle: true,
         title: Container(
+          padding: const EdgeInsets.only(bottom: 10),
           color: Colors.black12,
           width: double.infinity,
           child: const Text(
